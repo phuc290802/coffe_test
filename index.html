@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👤 Giới thiệu bản thân - Profile</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5A52D5;
+            --primary-light: #8B83FF;
+            --secondary: #FF6584;
+            --gradient: linear-gradient(135deg, #6C63FF 0%, #FF6584 100%);
+            --bg-dark: #0F0E1A;
+            --bg-card: #1A1A2E;
+            --bg-card-hover: #222244;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8B5D4;
+            --text-muted: #7A7899;
+            --shadow: 0 20px 60px rgba(108, 99, 255, 0.15);
+            --radius: 20px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* ===== GLOW ORB ===== */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb.orb1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(108, 99, 255, 0.08);
+            top: -200px;
+            right: -100px;
+        }
+
+        .glow-orb.orb2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 101, 132, 0.06);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== PROFILE CARD ===== */
+        .profile-wrapper {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* ---- SIDEBAR ---- */
+        .sidebar {
+            position: sticky;
+            top: 40px;
+            align-self: start;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .profile-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 80px rgba(108, 99, 255, 0.2);
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 40px rgba(108, 99, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .avatar-wrapper:hover img {
+            border-color: var(--secondary);
+            box-shadow: 0 0 60px rgba(255, 101, 132, 0.3);
+            transform: scale(1.02);
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 20px;
+            height: 20px;
+            background: #4ADE80;
+            border-radius: 50%;
+            border: 3px solid var(--bg-card);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .profile-card h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-card .title-role {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .profile-card .bio {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            padding: 0 4px;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-4px) scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            display: block;
+        }
+
+        .stat-item .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---- MAIN CONTENT ---- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .section-card:hover {
+            border-color: rgba(108, 99, 255, 0.2);
+        }
+
+        .section-card .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-card .section-title i {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        /* About */
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+
+        .about-text strong {
+            color: #fff;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 32px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .skill-item .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .skill-item .skill-info span:last-child {
+            color: var(--text-muted);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 1.2s ease;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(108, 99, 255, 0.2);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--bg-card);
+        }
+
+        .timeline-item .year {
+            font-weight: 600;
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            min-width: 70px;
+        }
+
+        .timeline-item .content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .timeline-item .content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 20px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .project-item:hover {
+            background: rgba(108, 99, 255, 0.06);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .project-item .project-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .project-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .project-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .project-item .tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .project-item .tags span {
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+            background: rgba(108, 99, 255, 0.15);
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        /* Contact Info */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .contact-item:hover {
+            background: rgba(108, 99, 255, 0.06);
+            border-color: var(--primary);
+        }
+
+        .contact-item i {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(108, 99, 255, 0.12);
+            color: var(--primary-light);
+            font-size: 1rem;
+        }
+
+        .contact-item .info {
+            font-size: 0.9rem;
+        }
+
+        .contact-item .info .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .profile-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .profile-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+            .section-card {
+                padding: 24px 20px;
+            }
+            .profile-card {
+                padding: 32px 20px;
+            }
+            .avatar-wrapper {
+                width: 110px;
+                height: 110px;
+            }
+            .profile-card h1 {
+                font-size: 1.5rem;
+            }
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+            .stat-item .number {
+                font-size: 1.1rem;
+            }
+            .timeline-item {
+                flex-direction: column;
+                gap: 4px;
+                padding-left: 16px;
+            }
+            .timeline-item .year {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .contact-item {
+                padding: 10px 12px;
+            }
+            .contact-item i {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-card);
+            color: #fff;
+            padding: 16px 28px;
+            border-radius: 14px;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 9999;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--primary-light);
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BACKGROUND EFFECTS ===== -->
+    <div class="bg-particles" id="particles"></div>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+
+        <div class="profile-wrapper">
+
+            <!-- ===== SIDEBAR ===== -->
+            <aside class="sidebar">
+                <div class="profile-card reveal">
+                    <div class="avatar-wrapper">
+                        <!-- Thay ảnh đại diện tại đây -->
+                        <img src="https://ui-avatars.com/api/?name=Nguyen+Văn+A&size=140&background=6C63FF&color=fff&bold=true" alt="Avatar">
+                        <div class="avatar-status"></div>
+                    </div>
+                    <h1>Nguyễn Trường Phúc</h1>
+                    <div class="title-role">💻 Full-Stack Developer</div>
+                    <p class="bio">
+                        Đam mê xây dựng những sản phẩm công nghệ đẹp và hiệu quả. 
+                        Luôn học hỏi và khám phá những điều mới mỗi ngày.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="number" id="projectCount">12</span>
+                            <span class="label">Dự án</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number" id="expCount">5+</span>
+                            <span class="label">Năm KN</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number" id="clientCount">24</span>
+                            <span class="label">Khách hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ===== MAIN CONTENT ===== -->
+            <main class="main-content">
+
+                <!-- About -->
+                <section class="section-card reveal">
+                    <div class="section-title">
+                        <i class="fas fa-user-astronaut"></i> Về tôi
+                    </div>
+                    <div class="about-text">
+                        <p>
+                            Xin chào! Tôi là <strong>Nguyễn Văn A</strong>, một Full-Stack Developer 
+                            với hơn 5 năm kinh nghiệm trong lĩnh vực phát triển web và ứng dụng di động. 
+                            Tôi đam mê tạo ra những sản phẩm không chỉ đẹp mắt mà còn mang lại giá trị 
+                            thực sự cho người dùng.
+                        </p>
+                        <p style="margin-top: 12px;">
+                            Tôi tin rằng công nghệ là công cụ mạnh mẽ để kết nối con người và giải quyết 
+                            những vấn đề thực tế. Luôn cập nhật xu hướng mới và không ngừng hoàn thiện 
+                            bản thân là triết lý của tôi.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="section-card reveal">
+                    <div class="section-title">
+                        <i class="fas fa-code"></i> Kỹ năng
+                    </div>
+                    <div class="skills-grid" id="skillsContainer">
+                        <!-- Skills sẽ được render bằng JS -->
+                    </div>
+                </section>
+
+                <!-- Experience -->
+                <section class="section-card reveal">
+                    <div class="section-title">
+                        <i class="fas fa-briefcase"></i> Kinh nghiệm
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="year">2022 - Nay</div>
+                            <div class="content">
+                                <h4>Senior Developer</h4>
+                                <p>Công ty Công nghệ XYZ · Phát triển hệ thống microservices, dẫn dắt team 6 người.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2020 - 2022</div>
+                            <div class="content">
+                                <h4>Full-Stack Developer</h4>
+                                <p>Startup ABC · Xây dựng nền tảng thương mại điện tử, tích hợp thanh toán.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2018 - 2020</div>
+                            <div class="content">
+                                <h4>Frontend Developer</h4>
+                                <p>Công ty DEF · Phát triển giao diện web, tối ưu hiệu suất và trải nghiệm người dùng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section class="section-card reveal">
+                    <div class="section-title">
+                        <i class="fas fa-rocket"></i> Dự án nổi bật
+                    </div>
+                    <div class="projects-grid" id="projectsContainer">
+                        <!-- Projects sẽ được render bằng JS -->
+                    </div>
+                </section>
+
+                <!-- Contact -->
+                <section class="section-card reveal">
+                    <div class="section-title">
+                        <i class="fas fa-address-card"></i> Liên hệ
+                    </div>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="label">Email</div>
+                                <span>nguyenvana@email.com</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="info">
+                                <div class="label">Điện thoại</div>
+                                <span>+84 912 345 678</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info">
+                                <div class="label">Địa chỉ</div>
+                                <span>TP. Hồ Chí Minh, Việt Nam</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <div class="info">
+                                <div class="label">Website</div>
+                                <span>nguyenvana.dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Đã sao chép!</span>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== PARTICLES =====
+            (function createParticles() {
+                const container = document.getElementById('particles');
+                for (let i = 0; i < 40; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.width = (Math.random() * 6 + 2) + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                    particle.style.animationDelay = (Math.random() * 20) + 's';
+                    particle.style.opacity = (Math.random() * 0.3 + 0.1);
+                    container.appendChild(particle);
+                }
+            })();
+
+            // ===== SKILLS DATA =====
+            const skills = [
+                { name: 'HTML / CSS', level: 92 },
+                { name: 'JavaScript (ES6+)', level: 88 },
+                { name: 'React / Next.js', level: 85 },
+                { name: 'Node.js / Express', level: 80 },
+                { name: 'Python / Django', level: 75 },
+                { name: 'SQL / MongoDB', level: 78 },
+                { name: 'Docker / DevOps', level: 65 },
+                { name: 'UI/UX Design', level: 70 },
+            ];
+
+            const skillsContainer = document.getElementById('skillsContainer');
+            skills.forEach(skill => {
+                const div = document.createElement('div');
+                div.className = 'skill-item';
+                div.innerHTML = `
+                    <div class="skill-info">
+                        <span>${skill.name}</span>
+                        <span>${skill.level}%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="fill" data-width="${skill.level}"></div>
+                    </div>
+                `;
+                skillsContainer.appendChild(div);
+            });
+
+            // ===== PROJECTS DATA =====
+            const projects = [
+                { 
+                    name: 'E-commerce Platform', 
+                    icon: '🛒', 
+                    desc: 'Nền tảng mua sắm trực tuyến với thanh toán VNPay',
+                    tags: ['React', 'Node.js', 'MongoDB']
+                },
+                { 
+                    name: 'Task Manager App', 
+                    icon: '📋', 
+                    desc: 'Quản lý công việc nhóm với real-time sync',
+                    tags: ['Vue.js', 'Firebase', 'Tailwind']
+                },
+                { 
+                    name: 'AI Chatbot', 
+                    icon: '🤖', 
+                    desc: 'Chatbot thông minh hỗ trợ khách hàng tự động',
+                    tags: ['Python', 'NLP', 'Flask']
+                },
+                { 
+                    name: 'Portfolio Website', 
+                    icon: '🎨', 
+                    desc: 'Trang web giới thiệu cá nhân với animation đẹp',
+                    tags: ['HTML', 'CSS', 'JavaScript']
+                }
+            ];
+
+            const projectsContainer = document.getElementById('projectsContainer');
+            projects.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'project-item';
+                div.innerHTML = `
+                    <div class="project-icon">${project.icon}</div>
+                    <h4>${project.name}</h4>
+                    <p>${project.desc}</p>
+                    <div class="tags">
+                        ${project.tags.map(tag => `<span>#${tag}</span>`).join('')}
+                    </div>
+                `;
+                // Click để hiển thị toast
+                div.addEventListener('click', function() {
+                    showToast(`📌 ${project.name} - Xem chi tiết dự án`);
+                });
+                projectsContainer.appendChild(div);
+            });
+
+            // ===== SKILL BAR ANIMATION (on scroll) =====
+            let skillBarsAnimated = false;
+            function animateSkillBars() {
+                if (skillBarsAnimated) return;
+                const fills = document.querySelectorAll('.fill');
+                const isVisible = Array.from(fills).some(fill => {
+                    const rect = fill.closest('.skill-item').getBoundingClientRect();
+                    return rect.top < window.innerHeight - 100;
+                });
+                if (isVisible) {
+                    fills.forEach(fill => {
+                        const width = parseFloat(fill.dataset.width);
+                        setTimeout(() => {
+                            fill.style.width = width + '%';
+                        }, 200);
+                    });
+                    skillBarsAnimated = true;
+                }
+            }
+
+            // ===== REVEAL ON SCROLL =====
+            function handleReveal() {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 80) {
+                        el.classList.add('visible');
+                    }
+                });
+                animateSkillBars();
+            }
+
+            window.addEventListener('scroll', handleReveal);
+            window.addEventListener('load', function() {
+                handleReveal();
+                // Force skill bars after load
+                setTimeout(animateSkillBars, 800);
+            });
+
+            // ===== TOAST =====
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            let toastTimer;
+
+            function showToast(msg) {
+                toastMessage.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2800);
+            }
+
+            // ===== CONTACT ITEM CLICK (copy info) =====
+            document.querySelectorAll('.contact-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const infoSpan = this.querySelector('.info span');
+                    if (infoSpan) {
+                        const text = infoSpan.textContent.trim();
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(text).then(() => {
+                                showToast(`📋 Đã sao chép: ${text}`);
+                            }).catch(() => {
+                                showToast(`📋 ${text}`);
+                            });
+                        } else {
+                            showToast(`📋 ${text}`);
+                        }
+                    }
+                });
+            });
+
+            // ===== SOCIAL LINKS =====
+            document.querySelectorAll('.social-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const platform = this.querySelector('i')?.className?.replace('fab fa-', '') || 'link';
+                    showToast(`🔗 Đang chuyển đến ${platform}...`);
+                });
+            });
+
+            // ===== STATS COUNTER (optional animation) =====
+            function animateNumbers() {
+                const numbers = document.querySelectorAll('.stat-item .number');
+                numbers.forEach(num => {
+                    const text = num.textContent;
+                    if (!isNaN(parseInt(text))) {
+                        const target = parseInt(text);
+                        let current = 0;
+                        const increment = Math.ceil(target / 40);
+                        const interval = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(interval);
+                            }
+                            num.textContent = current;
+                        }, 30);
+                    }
+                });
+            }
+
+            // Slight delay for counter animation
+            setTimeout(animateNumbers, 500);
+
+        });
+    </script>
+
+</body>
+</html>
