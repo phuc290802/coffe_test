@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👤 Giới thiệu bản thân - Profile</title>
-    <!-- Font Awesome -->
+    <title>☕ Coffee House - Trải nghiệm hương vị tinh túy</title>
+    <!-- Font Awesome cho icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -17,18 +17,14 @@
         }
 
         :root {
-            --primary: #6C63FF;
-            --primary-dark: #5A52D5;
-            --primary-light: #8B83FF;
-            --secondary: #FF6584;
-            --gradient: linear-gradient(135deg, #6C63FF 0%, #FF6584 100%);
-            --bg-dark: #0F0E1A;
-            --bg-card: #1A1A2E;
-            --bg-card-hover: #222244;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B8B5D4;
-            --text-muted: #7A7899;
-            --shadow: 0 20px 60px rgba(108, 99, 255, 0.15);
+            --primary: #6f4e37;
+            --primary-dark: #4a3228;
+            --primary-light: #a67c6b;
+            --cream: #f9f2e9;
+            --gold: #c9a87c;
+            --text-dark: #2d1f1a;
+            --text-light: #f5ede8;
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
             --radius: 20px;
             --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -38,575 +34,630 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        /* ===== ANIMATED BACKGROUND ===== */
-        .bg-particles {
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== BUTTON ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(111, 78, 55, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(111, 78, 55, 0.4);
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(111, 78, 55, 0.3);
+        }
+
+        /* ===== HEADER / NAVBAR ===== */
+        header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: floatParticle linear infinite;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* ===== GLOW ORB ===== */
-        .glow-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .glow-orb.orb1 {
-            width: 500px;
-            height: 500px;
-            background: rgba(108, 99, 255, 0.08);
-            top: -200px;
-            right: -100px;
-        }
-
-        .glow-orb.orb2 {
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 101, 132, 0.06);
-            bottom: -100px;
-            left: -100px;
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ===== PROFILE CARD ===== */
-        .profile-wrapper {
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 40px;
-            margin-top: 20px;
-        }
-
-        /* ---- SIDEBAR ---- */
-        .sidebar {
-            position: sticky;
-            top: 40px;
-            align-self: start;
-        }
-
-        .profile-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 40px 32px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 18px 0;
             transition: var(--transition);
+            background: transparent;
         }
 
-        .profile-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 30px 80px rgba(108, 99, 255, 0.2);
+        header.scrolled {
+            background: rgba(249, 242, 233, 0.92);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+            padding: 12px 0;
         }
 
-        .avatar-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-        }
-
-        .avatar-wrapper img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 0 40px rgba(108, 99, 255, 0.2);
-            transition: var(--transition);
-        }
-
-        .avatar-wrapper:hover img {
-            border-color: var(--secondary);
-            box-shadow: 0 0 60px rgba(255, 101, 132, 0.3);
-            transform: scale(1.02);
-        }
-
-        .avatar-status {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            width: 20px;
-            height: 20px;
-            background: #4ADE80;
-            border-radius: 50%;
-            border: 3px solid var(--bg-card);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .profile-card h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .profile-card .title-role {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 400;
-            margin-bottom: 16px;
-        }
-
-        .profile-card .bio {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.8;
-            margin-bottom: 24px;
-            padding: 0 4px;
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-4px) scale(1.05);
-            border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(108, 99, 255, 0.3);
-        }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item .number {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-            display: block;
-        }
-
-        .stat-item .label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ---- MAIN CONTENT ---- */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        /* Section Cards */
-        .section-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 32px 36px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .section-card:hover {
-            border-color: rgba(108, 99, 255, 0.2);
-        }
-
-        .section-card .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-card .section-title i {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        /* About */
-        .about-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 2;
-        }
-
-        .about-text strong {
-            color: #fff;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px 32px;
-        }
-
-        .skill-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .skill-item .skill-info {
+        .navbar {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            color: var(--gold);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .nav-links a {
             font-weight: 500;
-        }
-
-        .skill-item .skill-info span:last-child {
-            color: var(--text-muted);
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .skill-bar .fill {
-            height: 100%;
-            border-radius: 10px;
-            background: var(--gradient);
-            width: 0%;
-            transition: width 1.2s ease;
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .timeline-item {
-            display: flex;
-            gap: 20px;
-            padding-left: 20px;
-            border-left: 2px solid rgba(108, 99, 255, 0.2);
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: var(--transition);
             position: relative;
         }
 
-        .timeline-item::before {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            left: -7px;
-            top: 4px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
             background: var(--primary);
-            border: 2px solid var(--bg-card);
-        }
-
-        .timeline-item .year {
-            font-weight: 600;
-            color: var(--primary-light);
-            font-size: 0.9rem;
-            min-width: 70px;
-        }
-
-        .timeline-item .content h4 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .timeline-item .content p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .project-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 20px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
             transition: var(--transition);
-            cursor: pointer;
         }
 
-        .project-item:hover {
-            background: rgba(108, 99, 255, 0.06);
-            border-color: var(--primary);
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: #fff !important;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
         }
 
-        .project-item .project-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
+        .nav-cta::after {
+            display: none !important;
         }
 
-        .project-item h4 {
-            font-size: 1rem;
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--text-dark);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f9f2e9 0%, #e8ddd0 100%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201,168,124,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .hero-content h1 span {
+            color: var(--gold);
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #5a4a3e;
+            margin-bottom: 32px;
+            max-width: 460px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image .coffee-cup {
+            font-size: 18rem;
+            color: var(--primary);
+            filter: drop-shadow(0 20px 60px rgba(111, 78, 55, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: #7a6a5e;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--cream);
+            padding: 40px 32px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(111, 78, 55, 0.06);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
         }
 
-        .project-item p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 4px;
+        .feature-card p {
+            color: #6a5a4e;
+            font-size: 0.95rem;
         }
 
-        .project-item .tags {
+        /* ===== MENU ===== */
+        .menu {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .menu-tabs {
             display: flex;
-            gap: 6px;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
             flex-wrap: wrap;
-            margin-top: 10px;
         }
 
-        .project-item .tags span {
-            font-size: 0.7rem;
-            padding: 2px 12px;
-            border-radius: 20px;
-            background: rgba(108, 99, 255, 0.15);
-            color: var(--primary-light);
-            font-weight: 500;
+        .menu-tab {
+            padding: 10px 28px;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            color: var(--text-dark);
         }
 
-        /* Contact Info */
-        .contact-grid {
+        .menu-tab.active,
+        .menu-tab:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(111, 78, 55, 0.2);
+        }
+
+        .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
 
-        .contact-item {
+        .menu-item {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 24px 24px 28px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+            box-shadow: 0 16px 48px rgba(111, 78, 55, 0.1);
+        }
+
+        .menu-item .emoji {
+            font-size: 3.5rem;
+            margin-bottom: 8px;
+        }
+
+        .menu-item h4 {
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .menu-item .desc {
+            font-size: 0.9rem;
+            color: #7a6a5e;
+            margin: 4px 0 12px;
+        }
+
+        .menu-item .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .menu-item .add-btn {
+            margin-top: 14px;
+            padding: 8px 24px;
+            border-radius: 50px;
+            background: var(--cream);
+            border: none;
+            font-weight: 600;
+            color: var(--primary-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            max-width: 140px;
+        }
+
+        .menu-item .add-btn:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: var(--cream);
+            padding: 32px 28px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card .stars {
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            font-size: 1rem;
+            color: #3d2f28;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .testimonial-card .author {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            gap: 12px;
         }
 
-        .contact-item:hover {
-            background: rgba(108, 99, 255, 0.06);
-            border-color: var(--primary);
-        }
-
-        .contact-item i {
-            width: 36px;
-            height: 36px;
+        .testimonial-card .author .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            background: rgba(108, 99, 255, 0.12);
-            color: var(--primary-light);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-card .author .name {
+            font-weight: 600;
+        }
+
+        .testimonial-card .author .role {
+            font-size: 0.85rem;
+            color: #7a6a5e;
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            padding: 80px 0;
+            background: var(--primary-dark);
+            color: #fff;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+
+        .newsletter p {
+            opacity: 0.85;
+            margin-bottom: 28px;
+        }
+
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            min-width: 200px;
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            backdrop-filter: blur(4px);
+        }
+
+        .newsletter input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .newsletter button {
+            padding: 14px 36px;
+            border-radius: 50px;
+            border: none;
+            background: var(--gold);
+            color: var(--primary-dark);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter button:hover {
+            transform: scale(1.04);
+            background: #dbb98a;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1e1410;
+            color: rgba(255,255,255,0.7);
+            padding: 48px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand .logo {
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            max-width: 280px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 16px;
             font-size: 1rem;
         }
 
-        .contact-item .info {
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 24px;
+            text-align: center;
             font-size: 0.9rem;
         }
 
-        .contact-item .info .label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .profile-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                position: static;
-            }
-            .profile-card {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 16px;
-            }
-            .section-card {
-                padding: 24px 20px;
-            }
-            .profile-card {
-                padding: 32px 20px;
-            }
-            .avatar-wrapper {
-                width: 110px;
-                height: 110px;
-            }
-            .profile-card h1 {
-                font-size: 1.5rem;
-            }
-            .stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 4px;
-            }
-            .stat-item .number {
-                font-size: 1.1rem;
-            }
-            .timeline-item {
-                flex-direction: column;
-                gap: 4px;
-                padding-left: 16px;
-            }
-            .timeline-item .year {
-                min-width: auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .social-links a {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            .contact-item {
-                padding: 10px 12px;
-            }
-            .contact-item i {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ===== SCROLL ANIMATION ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== TOAST ===== */
+        /* ===== TOAST NOTIFICATION ===== */
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--bg-card);
+            background: var(--primary-dark);
             color: #fff;
             padding: 16px 28px;
-            border-radius: 14px;
-            border: 1px solid rgba(108, 99, 255, 0.2);
-            box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            border-radius: 16px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.2);
             transform: translateY(120px);
             opacity: 0;
             transition: var(--transition);
             z-index: 9999;
-            font-size: 0.95rem;
+            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 12px;
-            backdrop-filter: blur(12px);
         }
 
         .toast.show {
@@ -615,316 +666,376 @@
         }
 
         .toast i {
-            color: var(--primary-light);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            color: var(--gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-image .coffee-cup {
+                font-size: 12rem;
+            }
+            .features-grid,
+            .menu-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 80px 32px 40px;
+                gap: 24px;
+                box-shadow: -8px 0 40px rgba(0,0,0,0.06);
+                transition: var(--transition);
+                align-items: flex-start;
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .features-grid,
+            .menu-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            .newsletter h2 {
+                font-size: 1.8rem;
+            }
+            .hero-image .coffee-cup {
+                font-size: 8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .container {
+                padding: 0 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== BACKGROUND EFFECTS ===== -->
-    <div class="bg-particles" id="particles"></div>
-    <div class="glow-orb orb1"></div>
-    <div class="glow-orb orb2"></div>
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-mug-hot"></i> Coffee.
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="active">Trang chủ</a></li>
+                <li><a href="#features">Đặc biệt</a></li>
+                <li><a href="#menu">Thực đơn</a></li>
+                <li><a href="#testimonials">Đánh giá</a></li>
+                <li><a href="#newsletter" class="nav-cta">Đặt hàng</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
 
-    <!-- ===== MAIN CONTAINER ===== -->
-    <div class="container">
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>
+                    Hương vị <br><span>tinh túy mỗi ngày</span>
+                </h1>
+                <p>
+                    Thưởng thức những tách cà phê được rang xay thủ công từ những hạt cà phê
+                    chọn lọc, mang đến trải nghiệm khác biệt cho người sành điệu.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn"><i class="fas fa-coffee"></i> Xem thực đơn</a>
+                    <a href="#newsletter" class="btn btn-outline">Đặt ngay</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="coffee-cup">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="profile-wrapper">
+    <!-- ===== FEATURES ===== -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>✨ Tại sao chọn chúng tôi?</h2>
+                <p>Chúng tôi mang đến những trải nghiệm cà phê đẳng cấp từ khâu chọn hạt đến từng giọt cuối cùng.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-seedling"></i></div>
+                    <h3>100% Arabica</h3>
+                    <p>Hạt cà phê nguyên chất từ vùng cao nguyên, rang xay theo công thức riêng.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <h3>Rang thủ công</h3>
+                    <p>Mỗi mẻ rang đều được kiểm soát tỉ mỉ để giữ trọn hương vị tự nhiên.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-heart"></i></div>
+                    <h3>Yêu thương từng ly</h3>
+                    <p>Phục vụ với tất cả tâm huyết, mang đến niềm vui qua từng tách cà phê.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- ===== SIDEBAR ===== -->
-            <aside class="sidebar">
-                <div class="profile-card reveal">
-                    <div class="avatar-wrapper">
-                        <!-- Thay ảnh đại diện tại đây -->
-                        <img src="https://ui-avatars.com/api/?name=Nguyen+Văn+A&size=140&background=6C63FF&color=fff&bold=true" alt="Avatar">
-                        <div class="avatar-status"></div>
-                    </div>
-                    <h1>Nguyễn Trường Phúc</h1>
-                    <div class="title-role">💻 Full-Stack Developer</div>
-                    <p class="bio">
-                        Đam mê xây dựng những sản phẩm công nghệ đẹp và hiệu quả. 
-                        Luôn học hỏi và khám phá những điều mới mỗi ngày.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="number" id="projectCount">12</span>
-                            <span class="label">Dự án</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="number" id="expCount">5+</span>
-                            <span class="label">Năm KN</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="number" id="clientCount">24</span>
-                            <span class="label">Khách hàng</span>
+    <!-- ===== MENU ===== -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2>☕ Thực đơn của chúng tôi</h2>
+                <p>Chọn cho mình một ly cà phê yêu thích để bắt đầu ngày mới tràn đầy năng lượng.</p>
+            </div>
+            <div class="menu-tabs" id="menuTabs">
+                <button class="menu-tab active" data-category="all">Tất cả</button>
+                <button class="menu-tab" data-category="espresso">Espresso</button>
+                <button class="menu-tab" data-category="milk">Sữa</button>
+                <button class="menu-tab" data-category="special">Đặc biệt</button>
+            </div>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Items will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>💬 Khách hàng nói gì?</h2>
+                <p>Hàng nghìn khách hàng hài lòng với chất lượng cà phê và dịch vụ của chúng tôi.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>"Cà phê ở đây thật sự tuyệt vời! Hương vị đậm đà, thơm lừng. Mình đã trở thành khách hàng trung thành."</blockquote>
+                    <div class="author">
+                        <div class="avatar">MT</div>
+                        <div>
+                            <div class="name">Minh Thư</div>
+                            <div class="role">Nhà thiết kế</div>
                         </div>
                     </div>
                 </div>
-            </aside>
-
-            <!-- ===== MAIN CONTENT ===== -->
-            <main class="main-content">
-
-                <!-- About -->
-                <section class="section-card reveal">
-                    <div class="section-title">
-                        <i class="fas fa-user-astronaut"></i> Về tôi
-                    </div>
-                    <div class="about-text">
-                        <p>
-                            Xin chào! Tôi là <strong>Nguyễn Văn A</strong>, một Full-Stack Developer 
-                            với hơn 5 năm kinh nghiệm trong lĩnh vực phát triển web và ứng dụng di động. 
-                            Tôi đam mê tạo ra những sản phẩm không chỉ đẹp mắt mà còn mang lại giá trị 
-                            thực sự cho người dùng.
-                        </p>
-                        <p style="margin-top: 12px;">
-                            Tôi tin rằng công nghệ là công cụ mạnh mẽ để kết nối con người và giải quyết 
-                            những vấn đề thực tế. Luôn cập nhật xu hướng mới và không ngừng hoàn thiện 
-                            bản thân là triết lý của tôi.
-                        </p>
-                    </div>
-                </section>
-
-                <!-- Skills -->
-                <section class="section-card reveal">
-                    <div class="section-title">
-                        <i class="fas fa-code"></i> Kỹ năng
-                    </div>
-                    <div class="skills-grid" id="skillsContainer">
-                        <!-- Skills sẽ được render bằng JS -->
-                    </div>
-                </section>
-
-                <!-- Experience -->
-                <section class="section-card reveal">
-                    <div class="section-title">
-                        <i class="fas fa-briefcase"></i> Kinh nghiệm
-                    </div>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="year">2022 - Nay</div>
-                            <div class="content">
-                                <h4>Senior Developer</h4>
-                                <p>Công ty Công nghệ XYZ · Phát triển hệ thống microservices, dẫn dắt team 6 người.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="year">2020 - 2022</div>
-                            <div class="content">
-                                <h4>Full-Stack Developer</h4>
-                                <p>Startup ABC · Xây dựng nền tảng thương mại điện tử, tích hợp thanh toán.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="year">2018 - 2020</div>
-                            <div class="content">
-                                <h4>Frontend Developer</h4>
-                                <p>Công ty DEF · Phát triển giao diện web, tối ưu hiệu suất và trải nghiệm người dùng.</p>
-                            </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>"Không gian ấm cúng, nhân viên thân thiện. Ly Latte nghệ thuật đẹp mắt và ngon xuất sắc."</blockquote>
+                    <div class="author">
+                        <div class="avatar">HK</div>
+                        <div>
+                            <div class="name">Hoàng Khang</div>
+                            <div class="role">Freelancer</div>
                         </div>
                     </div>
-                </section>
-
-                <!-- Projects -->
-                <section class="section-card reveal">
-                    <div class="section-title">
-                        <i class="fas fa-rocket"></i> Dự án nổi bật
-                    </div>
-                    <div class="projects-grid" id="projectsContainer">
-                        <!-- Projects sẽ được render bằng JS -->
-                    </div>
-                </section>
-
-                <!-- Contact -->
-                <section class="section-card reveal">
-                    <div class="section-title">
-                        <i class="fas fa-address-card"></i> Liên hệ
-                    </div>
-                    <div class="contact-grid">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div class="info">
-                                <div class="label">Email</div>
-                                <span>nguyenvana@email.com</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div class="info">
-                                <div class="label">Điện thoại</div>
-                                <span>+84 912 345 678</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="info">
-                                <div class="label">Địa chỉ</div>
-                                <span>TP. Hồ Chí Minh, Việt Nam</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-globe"></i>
-                            <div class="info">
-                                <div class="label">Website</div>
-                                <span>nguyenvana.dev</span>
-                            </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>"Mình rất thích vị cà phê ở đây. Đặc biệt là dòng Specialty – uống là ghiền ngay!"</blockquote>
+                    <div class="author">
+                        <div class="avatar">PN</div>
+                        <div>
+                            <div class="name">Phương Ngân</div>
+                            <div class="role">Sinh viên</div>
                         </div>
                     </div>
-                </section>
-
-            </main>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <h2>📬 Nhận ưu đãi mỗi tuần</h2>
+            <p>Đăng ký để nhận thông tin về menu mới, khuyến mãi và sự kiện đặc biệt.</p>
+            <form id="subscribeForm">
+                <input type="email" placeholder="Email của bạn..." required>
+                <button type="submit">Đăng ký</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo"><i class="fas fa-mug-hot"></i> Coffee.</div>
+                    <p>Mang hương vị cà phê đích thực đến mọi nhà, từ những hạt cà phê tuyển chọn hàng đầu.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên kết</h4>
+                    <ul>
+                        <li><a href="#hero">Trang chủ</a></li>
+                        <li><a href="#menu">Thực đơn</a></li>
+                        <li><a href="#features">Đặc biệt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Chính sách</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kết nối</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Coffee. House. Tất cả quyền được bảo lưu.
+            </div>
+        </div>
+    </footer>
 
     <!-- ===== TOAST ===== -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Đã sao chép!</span>
+        <span id="toastMessage">Đã thêm vào giỏ hàng!</span>
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            // ===== PARTICLES =====
-            (function createParticles() {
-                const container = document.getElementById('particles');
-                for (let i = 0; i < 40; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.width = (Math.random() * 6 + 2) + 'px';
-                    particle.style.height = particle.style.width;
-                    particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                    particle.style.animationDelay = (Math.random() * 20) + 's';
-                    particle.style.opacity = (Math.random() * 0.3 + 0.1);
-                    container.appendChild(particle);
-                }
-            })();
-
-            // ===== SKILLS DATA =====
-            const skills = [
-                { name: 'HTML / CSS', level: 92 },
-                { name: 'JavaScript (ES6+)', level: 88 },
-                { name: 'React / Next.js', level: 85 },
-                { name: 'Node.js / Express', level: 80 },
-                { name: 'Python / Django', level: 75 },
-                { name: 'SQL / MongoDB', level: 78 },
-                { name: 'Docker / DevOps', level: 65 },
-                { name: 'UI/UX Design', level: 70 },
+            // ===== MENU DATA =====
+            const menuData = [
+                { id: 1, name: 'Espresso', emoji: '☕', category: 'espresso', desc: 'Đậm đà, nguyên bản', price: '45.000' },
+                { id: 2, name: 'Americano', emoji: '☕', category: 'espresso', desc: 'Espresso + nước nóng', price: '49.000' },
+                { id: 3, name: 'Latte', emoji: '🥛', category: 'milk', desc: 'Cà phê + sữa tươi', price: '55.000' },
+                { id: 4, name: 'Cappuccino', emoji: '☁️', category: 'milk', desc: 'Bọt sữa mịn màng', price: '59.000' },
+                { id: 5, name: 'Mocha', emoji: '🍫', category: 'milk', desc: 'Cà phê + socola', price: '65.000' },
+                { id: 6, name: 'Caramel Macchiato', emoji: '🍯', category: 'special', desc: 'Caramel ngọt ngào', price: '72.000' },
+                { id: 7, name: 'Cold Brew', emoji: '🧊', category: 'special', desc: 'Ủ lạnh 12 giờ', price: '68.000' },
+                { id: 8, name: 'Affogato', emoji: '🍦', category: 'special', desc: 'Espresso + kem vani', price: '79.000' },
+                { id: 9, name: 'Matcha Latte', emoji: '🍵', category: 'special', desc: 'Trà xanh + sữa', price: '62.000' },
             ];
 
-            const skillsContainer = document.getElementById('skillsContainer');
-            skills.forEach(skill => {
-                const div = document.createElement('div');
-                div.className = 'skill-item';
-                div.innerHTML = `
-                    <div class="skill-info">
-                        <span>${skill.name}</span>
-                        <span>${skill.level}%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="fill" data-width="${skill.level}"></div>
-                    </div>
-                `;
-                skillsContainer.appendChild(div);
-            });
+            const menuGrid = document.getElementById('menuGrid');
+            const tabs = document.querySelectorAll('.menu-tab');
+            let currentCategory = 'all';
 
-            // ===== PROJECTS DATA =====
-            const projects = [
-                { 
-                    name: 'E-commerce Platform', 
-                    icon: '🛒', 
-                    desc: 'Nền tảng mua sắm trực tuyến với thanh toán VNPay',
-                    tags: ['React', 'Node.js', 'MongoDB']
-                },
-                { 
-                    name: 'Task Manager App', 
-                    icon: '📋', 
-                    desc: 'Quản lý công việc nhóm với real-time sync',
-                    tags: ['Vue.js', 'Firebase', 'Tailwind']
-                },
-                { 
-                    name: 'AI Chatbot', 
-                    icon: '🤖', 
-                    desc: 'Chatbot thông minh hỗ trợ khách hàng tự động',
-                    tags: ['Python', 'NLP', 'Flask']
-                },
-                { 
-                    name: 'Portfolio Website', 
-                    icon: '🎨', 
-                    desc: 'Trang web giới thiệu cá nhân với animation đẹp',
-                    tags: ['HTML', 'CSS', 'JavaScript']
-                }
-            ];
-
-            const projectsContainer = document.getElementById('projectsContainer');
-            projects.forEach(project => {
-                const div = document.createElement('div');
-                div.className = 'project-item';
-                div.innerHTML = `
-                    <div class="project-icon">${project.icon}</div>
-                    <h4>${project.name}</h4>
-                    <p>${project.desc}</p>
-                    <div class="tags">
-                        ${project.tags.map(tag => `<span>#${tag}</span>`).join('')}
+            // Render menu
+            function renderMenu(category) {
+                const filtered = category === 'all' 
+                    ? menuData 
+                    : menuData.filter(item => item.category === category);
+                
+                menuGrid.innerHTML = filtered.map(item => `
+                    <div class="menu-item" data-id="${item.id}">
+                        <div class="emoji">${item.emoji}</div>
+                        <h4>${item.name}</h4>
+                        <div class="desc">${item.desc}</div>
+                        <div class="price">${item.price}đ</div>
+                        <button class="add-btn" data-id="${item.id}">Thêm vào giỏ</button>
                     </div>
-                `;
-                // Click để hiển thị toast
-                div.addEventListener('click', function() {
-                    showToast(`📌 ${project.name} - Xem chi tiết dự án`);
-                });
-                projectsContainer.appendChild(div);
-            });
+                `).join('');
 
-            // ===== SKILL BAR ANIMATION (on scroll) =====
-            let skillBarsAnimated = false;
-            function animateSkillBars() {
-                if (skillBarsAnimated) return;
-                const fills = document.querySelectorAll('.fill');
-                const isVisible = Array.from(fills).some(fill => {
-                    const rect = fill.closest('.skill-item').getBoundingClientRect();
-                    return rect.top < window.innerHeight - 100;
-                });
-                if (isVisible) {
-                    fills.forEach(fill => {
-                        const width = parseFloat(fill.dataset.width);
-                        setTimeout(() => {
-                            fill.style.width = width + '%';
-                        }, 200);
+                // Attach add-to-cart events to new buttons
+                document.querySelectorAll('.add-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const id = parseInt(this.dataset.id);
+                        const item = menuData.find(p => p.id === id);
+                        if (item) showToast(`Đã thêm ${item.name} vào giỏ hàng!`);
                     });
-                    skillBarsAnimated = true;
-                }
-            }
-
-            // ===== REVEAL ON SCROLL =====
-            function handleReveal() {
-                const reveals = document.querySelectorAll('.reveal');
-                reveals.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 80) {
-                        el.classList.add('visible');
-                    }
                 });
-                animateSkillBars();
             }
 
-            window.addEventListener('scroll', handleReveal);
-            window.addEventListener('load', function() {
-                handleReveal();
-                // Force skill bars after load
-                setTimeout(animateSkillBars, 800);
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    renderMenu(currentCategory);
+                });
             });
 
-            // ===== TOAST =====
+            // Initial render
+            renderMenu('all');
+
+            // ===== HAMBURGER =====
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('open');
+            });
+
+            // Close menu on link click (mobile)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // ===== HEADER SCROLL EFFECT =====
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 80) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // ===== TOAST SYSTEM =====
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
             let toastTimer;
@@ -935,60 +1046,61 @@
                 clearTimeout(toastTimer);
                 toastTimer = setTimeout(() => {
                     toast.classList.remove('show');
-                }, 2800);
+                }, 2600);
             }
 
-            // ===== CONTACT ITEM CLICK (copy info) =====
-            document.querySelectorAll('.contact-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const infoSpan = this.querySelector('.info span');
-                    if (infoSpan) {
-                        const text = infoSpan.textContent.trim();
-                        if (navigator.clipboard) {
-                            navigator.clipboard.writeText(text).then(() => {
-                                showToast(`📋 Đã sao chép: ${text}`);
-                            }).catch(() => {
-                                showToast(`📋 ${text}`);
-                            });
-                        } else {
-                            showToast(`📋 ${text}`);
-                        }
+            // ===== NEWSLETTER SUBSCRIPTION =====
+            const subscribeForm = document.getElementById('subscribeForm');
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                if (email) {
+                    showToast(`✅ Cảm ơn bạn đã đăng ký!`);
+                    this.reset();
+                }
+            });
+
+            // ===== SMOOTH SCROLL NAV =====
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const offset = 80;
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top, behavior: 'smooth' });
                     }
                 });
             });
 
-            // ===== SOCIAL LINKS =====
-            document.querySelectorAll('.social-links a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const platform = this.querySelector('i')?.className?.replace('fab fa-', '') || 'link';
-                    showToast(`🔗 Đang chuyển đến ${platform}...`);
+            // ===== ACTIVE NAV LINK ON SCROLL =====
+            const sections = document.querySelectorAll('section[id]');
+            window.addEventListener('scroll', function() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
                 });
             });
 
-            // ===== STATS COUNTER (optional animation) =====
-            function animateNumbers() {
-                const numbers = document.querySelectorAll('.stat-item .number');
-                numbers.forEach(num => {
-                    const text = num.textContent;
-                    if (!isNaN(parseInt(text))) {
-                        const target = parseInt(text);
-                        let current = 0;
-                        const increment = Math.ceil(target / 40);
-                        const interval = setInterval(() => {
-                            current += increment;
-                            if (current >= target) {
-                                current = target;
-                                clearInterval(interval);
-                            }
-                            num.textContent = current;
-                        }, 30);
-                    }
-                });
-            }
-
-            // Slight delay for counter animation
-            setTimeout(animateNumbers, 500);
+            // ===== MENU ITEM CLICK (show detail) =====
+            menuGrid.addEventListener('click', function(e) {
+                const item = e.target.closest('.menu-item');
+                if (item && !e.target.classList.contains('add-btn')) {
+                    const name = item.querySelector('h4')?.textContent || 'sản phẩm';
+                    showToast(`☕ ${name} - chi tiết đang cập nhật...`);
+                }
+            });
 
         });
     </script>
